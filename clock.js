@@ -8,8 +8,8 @@ var radius = canvas.height/2;
 ctx.translate(radius, radius);
 //reduce clock radius so it is drawn inside the canvas
 radius = radius * 0.90;
-//call clock-drawing function
-drawClock();
+//call clock-drawing function using setInterval method to start it every second
+setInterval(drawClock, 1000);
 //create clock-drawing function
 function drawClock(){
   drawFace(ctx, radius);
