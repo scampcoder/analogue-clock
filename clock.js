@@ -83,13 +83,13 @@ function drawTime(ctx, radius){
   var second = now.getSeconds();
   //calculate angle of hour hand
   hour = hour%12;
-  hour=(hour*Math.PI/6)+
+  hour = (hour*Math.PI/6)+
   (minute*Math.PI/(6*60))+
   (second*Math.PI/(360*60));
   drawHand(ctx, hour, radius*0.5, radius*0.07);
   //calculate angle of minute hand
   minute = (minute*Math.PI/30)+(second*Math.PI/(30*60));
-  drawHand(cts, minute, radius*0.08, radius*0.07);
+  drawHand(ctx, minute, radius*0.8, radius*0.07);
   //calculate angle second hand
   second = (second*Math.PI/30);
   drawHand(ctx, second, radius*0.9, radius*0.02);
@@ -97,11 +97,14 @@ function drawTime(ctx, radius){
 
 function drawHand(ctx, pos, length, width){
   ctx.beginPath();
-  ctx.lineWdith = width;
+  ctx.lineWidth = width;
+  //style end of line
   ctx.lineCap = "round";
-  ctx.moveTo(0, 0);
+  ctx.moveTo(0,0);
   ctx.rotate(pos);
+  //makes new point and creates line to that point from last specified point
   ctx.lineTo(0, -length);
+  //draw line
   ctx.stroke();
   ctx.rotate(-pos);
 };
