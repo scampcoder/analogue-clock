@@ -12,7 +12,8 @@ radius = radius * 0.90;
 drawClock();
 //create clock-drawing function
 function drawClock(){
-  drawFace(ctx, radius)
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
 };
 
 function drawFace(ctx, radius) {
@@ -45,3 +46,29 @@ function drawFace(ctx, radius) {
   ctx.fillStyle = '#333';
   ctx.fill();
 };
+
+function drawNumbers(ctx, radius){
+  //var for angle
+  var ang;
+  //var for clock numbers
+  var num;
+  //set font size to 15% of radius
+  ctx.font = radius*0.15 + "px arial";
+  //set text align to middle and center
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+  //calculate print position for the clock numbers at 85% of radius
+  for(num = 1; num < 13; num++){
+    ang = num * Math.PI / 6;
+    ctx.rotate(ang);
+    //change (x,y)
+    ctx.translate(0, -radius*0.85);
+    ctx.rotate(-ang);
+    //put text on clock as string
+    ctx.fillText(num.toString(), 0, 0);
+    ctx.rotate(ang);
+    //change (x,y)
+    ctx.translate(0, radius*0.85);
+    ctx.rotate(-ang);
+  }
+}
