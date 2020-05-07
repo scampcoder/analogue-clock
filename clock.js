@@ -14,6 +14,7 @@ drawClock();
 function drawClock(){
   drawFace(ctx, radius);
   drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
 };
 
 function drawFace(ctx, radius) {
@@ -70,5 +71,26 @@ function drawNumbers(ctx, radius){
     //change (x,y)
     ctx.translate(0, radius*0.85);
     ctx.rotate(-ang);
-  }
-}
+  };
+};
+
+
+function drawTime(ctx, radius){
+  //vars of current date and time
+  var now = new Date();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var second = now.getSeconds();
+  //calculate angle of hour hand
+  hour = hour%12;
+  hour=(hour*Math.PI/6)+
+  (minute*Math.PI/(6*60))+
+  (second*Math.PI/(360*60));
+  drawHand(ctx, hour, radius*0.5, radius*0.07);
+  //calculate angle of minute hand
+  minute = (minute*Math.PI/30)+(second*Math.PI/(30*60));
+  drawHand(cts, minute, radius*0.08, radius*0.07);
+  //calculate angle second hand
+  second = (second*Math.PI/30);
+  drawHand(ctx, second, radius*0.9, radius*0.02);
+};
